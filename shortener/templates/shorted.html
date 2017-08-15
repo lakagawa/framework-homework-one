@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block body %}
+    <br/>
+    <div class="container">
+        <div class="jumbotron">
+            <h1>{% trans 'Encurtador de URL' %}</h1>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                    <a href="{{request.scheme}}://{{request.get_host}}/{{short_url.code}}">
+                        <h2>
+                            {{request.scheme}}://{{request.get_host}}/{{short_url.code}}
+                            <br/>
+                            <small>{{short_url.url}}</small>
+                        </h2>
+                    </a>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                    <a href="{% url 'shortener:url-create' %}"
+                       class="btn btn-primary">
+                        {% trans 'Encurtar Outra' %}
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-primary">
+                  <div class="panel-heading">
+                    <h3 class="panel-title">TOP 3 URLs mais acessadas</h3>
+                  </div>
+                  <div class="panel-body">
+                    <table class="table table-striped">
+                        <thead>
+                            <th>URL</th>
+                            <th>Número de Redirecionamentos</th>
+                        </thead>
+                        <tbody>
+                            {% for item in mais_acessadas %}
+                                <tr><td>{{item.url}}</td> <td>{{item.count}}</td></tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                  </div>
+                </div>  
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-info">
+                  <div class="panel-heading">
+                    <h3 class="panel-title">Ultimas 5 URL cadastradas</h3>
+                  </div>
+                  <div class="panel-body">
+                    <table class="table table-striped">
+                        <thead>
+                            <th>URL</th>
+                            <th>Número de Redirecionamentos</th>
+                        </thead>
+                        <tbody>
+                            {% for item in ultimos %}
+                                <tr><td>{{item.url}}</td> <td>{{item.count}}</td></tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                  </div>
+                </div>  
+            </div>
+        </div>
+        <!-- <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-primary">
+                  <div class="panel-heading">
+                    <h3 class="panel-title">URLs</h3>
+                  </div>
+                  <div class="panel-body">
+                    <table class="table table-striped">
+                        <thead>
+                            <th>URL</th>
+                            <th>Número de Redirecionamentos</th>
+                        </thead>
+                        <tbody>
+                            {% for item in itens %}
+                                <tr><td>{{item.url}}</td> <td>{{item.count}}</td></tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                  </div>
+                </div>
+            </div>
+        </div> -->
+    </div>
+{% endblock %}
